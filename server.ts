@@ -1,22 +1,25 @@
-import { setupDb } from "./db/db-setup";
-const PORT = process.env.PORT || 3000;
+import { setupDb } from "./src/db/db-setup";
 import express from "express";
+import routerGroups from "./src/routers/groups";
+import routerTeachers from "./src/routers/teacher";
+import routerDiscipline from "./src/routers/discipline";
 
 require("express-async-errors");
+const PORT = process.env.PORT || 3000;
 const app = require("express")();
 const server = require("http").createServer(app);
 
-// import routerUser from "./routes/user";
+
 setupDb();
 
 app.use(express.json());
+app.use("/groups", routerGroups);
+app.use("/teachers", routerTeachers);
+app.use("/discipline", routerDiscipline);
 
-app.use("/", (req: any, res: { json: (arg0: { message: string; }) => any; }) => {
-    return res.json({ message: "HALO" });
-});
-
-// app.use("/user", routerUser);
-
+// app.use("/", (req: any, res: { json: (arg0: { message: string; }) => any; }) => {
+//     return res.json({ message: "HALO" });
+// });
 app.use(errorHandler);
 
 
