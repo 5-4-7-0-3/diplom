@@ -10,6 +10,10 @@ const disciplineSchema = new Schema({
     nameTeacher: {
         ref: 'Teacher',
         type: Schema.Types.ObjectId
+    },
+    numberOfHours: {
+        type: Number,
+        required: true,
     }
 });
 

@@ -4,8 +4,8 @@ class DisciplineService {
         this.disciplineDAO = disciplineDAO;
     }
     
-    createDiscipline(nameDiscipline: string, nameTeacher: string) {
-        return this.disciplineDAO.createDiscipline(nameDiscipline, nameTeacher);
+    createDiscipline(nameDiscipline: string, nameTeacher: string, numberOfHours: number) {
+        return this.disciplineDAO.createDiscipline(nameDiscipline, nameTeacher, numberOfHours);
     }
 
     findOneDiscipline(id: string) {
@@ -16,8 +16,8 @@ class DisciplineService {
         return this.disciplineDAO.findDiscipline();
     }
 
-    updateDiscipline(id: string, nameDiscipline: string, nameTeacher: string) {
-        return this.disciplineDAO.updateDiscipline(id, nameDiscipline, nameTeacher);
+    updateDiscipline(id: string, nameDiscipline: string, nameTeacher: string, numberOfHours: number) {
+        return this.disciplineDAO.updateDiscipline(id, nameDiscipline, nameTeacher, numberOfHours);
     }
 
     deleteDiscipline(id: string) {

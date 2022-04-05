@@ -6,8 +6,9 @@ class DisciplineController {
     }
 
     async createDiscipline(req: any, res: any) {
-        const { nameDiscipline, nameTeacher } = req.body;
-        const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameTeacher );
+        const { nameDiscipline, nameTeacher, numberOfHours } = req.body;
+        console.log(req.body)
+        const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameTeacher, numberOfHours );
         res.json(newDiscipline);
     }
 
@@ -24,11 +25,12 @@ class DisciplineController {
     }
 
     async updateDiscipline(req: any, res: any) {
-        const { nameDiscipline, nameTeacher } = req.body;
+        const { nameDiscipline, nameTeacher, numberOfHours } = req.body;
         const updateDiscipline = await this.disciplineService.updateDiscipline(
             req.params.id,
             nameDiscipline, 
-            nameTeacher
+            nameTeacher,
+            numberOfHours
         );
         res.json(updateDiscipline);
     }

@@ -3,27 +3,27 @@ import controllers from "../controllers";
 const router = express.Router();
 
 router.post(
-    "/create", controllers.disciplineController.createDiscipline.bind(controllers.disciplineController)
+    "/create", controllers.groupsController.createGroup.bind(controllers.groupsController)
 
 );
 
 router.get(
-    "/findOneDiscipline/:id", controllers.disciplineController.findOneDiscipline.bind(controllers.disciplineController)
+    "/findOneGroup/:id", controllers.groupsController.findOneGroup.bind(controllers.groupsController)
 
 );
 
 router.get(
-    "/findDiscipline", controllers.disciplineController.findDiscipline.bind(controllers.disciplineController)
+    "/findGroup", controllers.groupsController.findGroups.bind(controllers.groupsController)
 
 );
 
 router.put(
-    "/updateDiscipline/:id", controllers.disciplineController.updateDiscipline.bind(controllers.disciplineController)
+    "/updateGroup/:id", controllers.groupsController.updateGroup.bind(controllers.groupsController)
 
 );
 
 router.delete(
-    "/deleteDiscipline/:id", controllers.disciplineController.deleteDiscipline.bind(controllers.disciplineController)
+    "/deleteGroup/:id", controllers.groupsController.deleteGroup.bind(controllers.groupsController)
 
 );
 

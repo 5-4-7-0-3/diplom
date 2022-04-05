@@ -1,10 +1,11 @@
 import { Discipline } from "../db/models/discipline";
 
 class DisciplineDAO {
-    createDiscipline(nameDiscipline: string, nameTeacher: string) {
+    createDiscipline(nameDiscipline: string, nameTeacher: string, numberOfHours: number) {
         return new Discipline({
             nameDiscipline,
-            nameTeacher
+            nameTeacher,
+            numberOfHours
         }).save();
     }
 
@@ -16,11 +17,11 @@ class DisciplineDAO {
         return Discipline.find();
     }
 
-    updateDiscipline(id: string, nameDiscipline: string, nameTeacher: string){
+    updateDiscipline(id: string, nameDiscipline: string, nameTeacher: string, numberOfHours: number){
         return Discipline.findOneAndUpdate(
             { _id: id },
             {
-              $set: {nameDiscipline, nameTeacher}
+              $set: {nameDiscipline, nameTeacher, numberOfHours}
             },
             { new: true }
           );

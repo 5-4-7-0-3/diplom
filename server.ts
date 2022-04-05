@@ -3,6 +3,7 @@ import express from "express";
 import routerGroups from "./src/routers/groups";
 import routerTeachers from "./src/routers/teacher";
 import routerDiscipline from "./src/routers/discipline";
+import routerSchedule from "./src/routers/schedule";
 
 require("express-async-errors");
 const PORT = process.env.PORT || 3000;
@@ -14,8 +15,9 @@ setupDb();
 
 app.use(express.json());
 app.use("/groups", routerGroups);
-app.use("/teachers", routerTeachers);
 app.use("/discipline", routerDiscipline);
+app.use("/teachers", routerTeachers);
+app.use("/schedule", routerSchedule);
 
 // app.use("/", (req: any, res: { json: (arg0: { message: string; }) => any; }) => {
 //     return res.json({ message: "HALO" });

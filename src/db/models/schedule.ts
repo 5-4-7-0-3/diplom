@@ -7,12 +7,7 @@ const scheduleSchema = new Schema({
         type: Schema.Types.ObjectId
     },    
 
-    couple: {
-        type: Number,
-        required: true,
-    },
-
-    date: {
+    dateDiscipline: {
         type: Date,
         required: true,
     },
