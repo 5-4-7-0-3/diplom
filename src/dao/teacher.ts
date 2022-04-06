@@ -1,12 +1,12 @@
 import { Teacher } from "../db/models/teacher";
 
 class TeacherDAO {
-    createTeacher( nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
+    createTeacher( nameTeacher:string, surname:string, login:string, hashPassword:string, nameDiscipline:string, healthStatus:string, role:string ) {
         return new Teacher({
             nameTeacher,
             surname,
             login,
-            password,
+            password: hashPassword,
             nameDiscipline,
             healthStatus, 
             role 
@@ -34,6 +34,12 @@ class TeacherDAO {
     deleteTeacher(id: string){
         return Teacher.deleteOne({ _id: id })
     }
+
+    loginVerification(login: string) {
+        return Teacher.findOne({ login: login })
+    
+    
+      }
     
 }
 

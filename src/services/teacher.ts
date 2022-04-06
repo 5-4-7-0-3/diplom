@@ -3,8 +3,8 @@ class TeachersService {
     constructor(teacherDAO:any) {
         this.teacherDAO = teacherDAO;
     }
-    createTeacher( nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
-        return this.teacherDAO.createTeacher( nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
+    createTeacher( nameTeacher:string, surname:string, login:string, hashPassword:string, nameDiscipline:string, healthStatus:string, role:string ) {
+        return this.teacherDAO.createTeacher( nameTeacher, surname, login, hashPassword, nameDiscipline, healthStatus, role );
     }
 
     findOneTeacher(id: string) {
@@ -21,6 +21,10 @@ class TeachersService {
 
     deleteTeacher(id: string) {
         return this.teacherDAO.deleteTeacher(id);
+    }
+
+    loginVerification(login: string) {
+        return this.teacherDAO.loginVerification(login);
     }
 }
 export { TeachersService };

@@ -1,3 +1,6 @@
+import bcrypt from "bcryptjs"
+import express from 'express';
+import { validationResult } from "express-validator";
 class TeachersController {
     
     teachersService: any;
@@ -6,27 +9,34 @@ class TeachersController {
         this.teachersService = teachersService;
     }
 
-    async createTeacher(req: any, res: any) {
+    async createTeacher(req: express.Request, res: express.Response) {
         const {  nameTeacher, surname, login, password, nameDiscipline } = req.body;
         const role: string = "user";
         const healthStatus: string = "healthy";
-        const newTeacher = await this.teachersService.createTeacher( nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
+        const newTeacher = await this.teachersService.createTeacher(
+             nameTeacher, 
+             surname, 
+             login, 
+             password, 
+             nameDiscipline, 
+             healthStatus, 
+             role );
         res.json(newTeacher);
     }
 
-    async findOneTeacher(req: any, res: any) {
+    async findOneTeacher(req: express.Request, res: express.Response) {
         const OneTeacher = await this.teachersService.findOneTeacher(
             req.params.id
         );
         res.json(OneTeacher);
     }
 
-    async findTeachers(req: any, res: any) {
+    async findTeachers(req: express.Request, res: express.Response) {
         const teacher = await this.teachersService.findTeachers();
         res.json(teacher);
     }
 
-    async updateTeacher(req: any, res: any) {
+    async updateTeacher(req: express.Request, res: express.Response) {
         const { nameTeacher, surname, login, password, nameDiscipline, healthStatus, role } = req.body;
         const updateTeacher = await this.teachersService.updateTeacher(
             req.params.id,
@@ -41,7 +51,7 @@ class TeachersController {
         res.json(updateTeacher);
     }
 
-    async deleteTeacher(req: any, res: any) {
+    async deleteTeacher(req: express.Request, res: express.Response) {
         const deleteTeacher = await this.teachersService.deleteTeacher(
             req.params.id
         );
@@ -50,6 +60,34 @@ class TeachersController {
             } else res.json({ message: "Не вдалось видалити." })
             
                 
+    }
+
+    async registrationTeacher(req: express.Request, res: express.Response) {
+        const err = validationResult(req);
+        if (!err.isEmpty()) {
+            return res.status(400).json(err);
+        }
+        const { nameTeacher, surname, login, password, nameDiscipline } = req.body;
+        const candidate = await this.teachersService.loginVerification(login);
+        const role: string = "user";
+        const healthStatus: string = "healthy";
+
+        if (candidate) {
+            return res.status(400).json({ message: "User exists" });
+        } else {
+
+            const hashPassword = bcrypt.hashSync(password, 7);
+            const user = await this.teachersService.createTeacher(
+                nameTeacher, 
+                surname, 
+                login, 
+                hashPassword, 
+                nameDiscipline, 
+                healthStatus, 
+                role
+            );
+            return res.json(user);
+        }
     }
 }
 
