@@ -1,31 +1,31 @@
 import { Teacher } from "../db/models/teacher";
 
 class TeacherDAO {
-    createTeacher( nameTeacher:string, surname:string, login:string, password:string, discipline:string, healthStatus:string, role:string ) {
+    createTeacher( nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
         return new Teacher({
             nameTeacher,
             surname,
             login,
             password,
-            discipline,
+            nameDiscipline,
             healthStatus, 
             role 
         }).save();
     }
 
     findOneTeacher(id: string) {
-        return Teacher.findById(id);
+        return Teacher.findById(id).populate({ path: "nameDiscipline", select: "nameDiscipline" });
     }
 
     findTeachers(){
-        return Teacher.find();
+        return Teacher.find().populate({ path: "nameDiscipline", select: "nameDiscipline" });
     }
 
-    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, discipline:string, healthStatus:string, role:string ){
+    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ){
         return Teacher.findOneAndUpdate(
             { _id: id },
             {
-              $set: {nameTeacher, surname, login, password, discipline, healthStatus, role}
+              $set: {nameTeacher, surname, login, password, nameDiscipline, healthStatus, role}
             },
             { new: true }
           );

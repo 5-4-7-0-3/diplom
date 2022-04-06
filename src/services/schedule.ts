@@ -4,8 +4,8 @@ class ScheduleService {
         this.scheduleDAO = scheduleDAO;
     }
     
-    createSchedule(nameGroup: string, couple: number, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
-        return this.scheduleDAO.createSchedule(nameGroup, couple, dateDiscipline, nameDiscipline, nameTeacher);
+    createSchedule(dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
+        return this.scheduleDAO.createSchedule(dateDiscipline, nameDiscipline, nameTeacher);
     }
 
     findOneSchedule(id: string) {
@@ -16,8 +16,8 @@ class ScheduleService {
         return this.scheduleDAO.findSchedule();
     }
 
-    updateSchedule(id: string, nameGroup: string, couple: number, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
-        return this.scheduleDAO.updateSchedule(id, nameGroup, couple, dateDiscipline, nameDiscipline, nameTeacher);
+    updateSchedule(id: string, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
+        return this.scheduleDAO.updateSchedule(id, dateDiscipline, nameDiscipline, nameTeacher);
     }
 
     deleteSchedule(id: string) {

@@ -6,17 +6,16 @@ class DisciplineController {
     }
 
     async createDiscipline(req: any, res: any) {
-        const { nameDiscipline, nameTeacher, numberOfHours } = req.body;
-        console.log(req.body)
-        const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameTeacher, numberOfHours );
+        const { nameDiscipline, nameGroup, numberOfHours } = req.body;
+        const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameGroup, numberOfHours );
         res.json(newDiscipline);
     }
 
     async findOneDiscipline(req: any, res: any) {
-        const OneDiscipline = await this.disciplineService.findOneDiscipline(
+        const oneDiscipline = await this.disciplineService.findOneDiscipline(
             req.params.id
         );
-        res.json(OneDiscipline);
+        res.json(oneDiscipline);
     }
 
     async findDiscipline(req: any, res: any) {
@@ -25,11 +24,11 @@ class DisciplineController {
     }
 
     async updateDiscipline(req: any, res: any) {
-        const { nameDiscipline, nameTeacher, numberOfHours } = req.body;
+        const { nameDiscipline, nameGroup, numberOfHours } = req.body;
         const updateDiscipline = await this.disciplineService.updateDiscipline(
             req.params.id,
             nameDiscipline, 
-            nameTeacher,
+            nameGroup,
             numberOfHours
         );
         res.json(updateDiscipline);

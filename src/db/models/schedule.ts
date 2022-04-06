@@ -2,23 +2,18 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const scheduleSchema = new Schema({
-    nameGroup: {
-        ref: 'Groups',
-        type: Schema.Types.ObjectId
-    },    
-
     dateDiscipline: {
         type: Date,
         required: true,
     },
 
     nameDiscipline: {
-        ref: 'Discipline',
+        ref: 'discipline',
         type: Schema.Types.ObjectId
     },
 
     nameTeacher: {
-        ref: 'Teaacher',
+        ref: 'teacher',
         type: Schema.Types.ObjectId
     }
 

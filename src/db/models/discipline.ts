@@ -7,15 +7,17 @@ const disciplineSchema = new Schema({
         type: String,
         required: true,
     },
-    nameTeacher: {
-        ref: 'Teacher',
-        type: Schema.Types.ObjectId
+
+    nameGroup: {
+        type: String,
+        required: true,
     },
+
     numberOfHours: {
         type: Number,
         required: true,
     }
 });
 
-const Discipline = mongoose.model("disciplines", disciplineSchema);
+const Discipline = mongoose.model("discipline", disciplineSchema);
 export { Discipline };

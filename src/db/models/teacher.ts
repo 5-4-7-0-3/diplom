@@ -22,9 +22,9 @@ const teacherSchema = new Schema({
         required: true,
     },
 
-    discipline: {
-        type: String,
-        required: true,
+    nameDiscipline: {
+        ref: 'discipline',
+        type: [Schema.Types.ObjectId]
     },
 
     healthStatus: {
@@ -38,5 +38,5 @@ const teacherSchema = new Schema({
     }
 });
 
-const Teacher = mongoose.model("teachers", teacherSchema);
+const Teacher = mongoose.model("teacher", teacherSchema);
 export { Teacher };

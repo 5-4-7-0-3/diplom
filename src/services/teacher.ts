@@ -3,8 +3,8 @@ class TeachersService {
     constructor(teacherDAO:any) {
         this.teacherDAO = teacherDAO;
     }
-    createTeacher( nameTeacher:string, surname:string, login:string, password:string, discipline:string, healthStatus:string, role:string ) {
-        return this.teacherDAO.createTeacher( nameTeacher, surname, login, password, discipline, healthStatus, role );
+    createTeacher( nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
+        return this.teacherDAO.createTeacher( nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
     }
 
     findOneTeacher(id: string) {
@@ -15,8 +15,8 @@ class TeachersService {
         return this.teacherDAO.findTeachers();
     }
 
-    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, discipline:string, healthStatus:string, role:string ) {
-        return this.teacherDAO.updateTeacher(id, nameTeacher, surname, login, password, discipline, healthStatus, role );
+    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
+        return this.teacherDAO.updateTeacher(id, nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
     }
 
     deleteTeacher(id: string) {

@@ -7,10 +7,10 @@ class TeachersController {
     }
 
     async createTeacher(req: any, res: any) {
-        const {  nameTeacher, surname, login, password, discipline } = req.body;
+        const {  nameTeacher, surname, login, password, nameDiscipline } = req.body;
         const role: string = "user";
         const healthStatus: string = "healthy";
-        const newTeacher = await this.teachersService.createTeacher( nameTeacher, surname, login, password, discipline, healthStatus, role );
+        const newTeacher = await this.teachersService.createTeacher( nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
         res.json(newTeacher);
     }
 
@@ -27,14 +27,14 @@ class TeachersController {
     }
 
     async updateTeacher(req: any, res: any) {
-        const { nameTeacher, surname, login, password, discipline, healthStatus, role } = req.body;
+        const { nameTeacher, surname, login, password, nameDiscipline, healthStatus, role } = req.body;
         const updateTeacher = await this.teachersService.updateTeacher(
             req.params.id,
             nameTeacher, 
             surname, 
             login, 
             password, 
-            discipline, 
+            nameDiscipline, 
             healthStatus, 
             role
         );

@@ -1,11 +1,8 @@
 import { Schedule } from "../db/models/schedule";
 
 class ScheduleDAO {
-    createSchedule(nameGroup: string, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
-        console.log(nameGroup, dateDiscipline, nameDiscipline, nameTeacher);
-        
+    createSchedule( dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
         return new Schedule({
-            nameGroup,
             dateDiscipline, 
             nameDiscipline, 
             nameTeacher
@@ -13,19 +10,20 @@ class ScheduleDAO {
     }
 
     findOneSchedule(id: string) {
-        return Schedule.findById(id);
+        return Schedule.findById(id).populate({ path: "nameDiscipline", select: "nameDiscipline" })
+        .populate({ path: "nameTeacher", select: "nameTeacher" });
     }
 
     findSchedule(){
-        return Schedule.find();
+        return Schedule.find().populate({ path: "nameDiscipline", select: ["nameDiscipline","nameGroup"] })
+        .populate({ path: "nameTeacher", select: ["nameTeacher","surname","healthStatus"] });
     }
 
-    updateSchedule(id: string, nameGroup: string, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string){
+    updateSchedule(id: string, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string){
         return Schedule.findOneAndUpdate(
             { _id: id },
             {
               $set: {
-                     nameGroup,
                      dateDiscipline,
                      nameDiscipline,
                      nameTeacher

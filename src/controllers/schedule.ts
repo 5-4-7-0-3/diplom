@@ -6,8 +6,8 @@ class ScheduleController {
     }
 
     async createSchedule(req: any, res: any) {
-        const { nameGroup, dateDiscipline, nameDiscipline, nameTeacher } = req.body;
-        const newSchedule = await this.scheduleService.createSchedule( nameGroup, dateDiscipline, nameDiscipline, nameTeacher );
+        const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
+        const newSchedule = await this.scheduleService.createSchedule(  dateDiscipline, nameDiscipline, nameTeacher );
         res.json(newSchedule);
     }
 
@@ -24,10 +24,9 @@ class ScheduleController {
     }
 
     async updateSchedule(req: any, res: any) {
-        const { nameGroup, dateDiscipline, nameDiscipline, nameTeacher } = req.body;
+        const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
         const updateSchedule = await this.scheduleService.updateSchedule(
             req.params.id,
-            nameGroup,
             dateDiscipline,
             nameDiscipline,
             nameTeacher

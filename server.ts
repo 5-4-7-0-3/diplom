@@ -1,6 +1,5 @@
 import { setupDb } from "./src/db/db-setup";
 import express from "express";
-import routerGroups from "./src/routers/groups";
 import routerTeachers from "./src/routers/teacher";
 import routerDiscipline from "./src/routers/discipline";
 import routerSchedule from "./src/routers/schedule";
@@ -14,7 +13,6 @@ const server = require("http").createServer(app);
 setupDb();
 
 app.use(express.json());
-app.use("/groups", routerGroups);
 app.use("/discipline", routerDiscipline);
 app.use("/teachers", routerTeachers);
 app.use("/schedule", routerSchedule);
