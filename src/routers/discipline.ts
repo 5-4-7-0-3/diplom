@@ -1,9 +1,12 @@
 import express from "express";
 import controllers from "../controllers";
+import roleMiddleware from "../middleware/roleMiddleware";
 const router = express.Router();
 
 router.post(
-    "/create", controllers.disciplineController.createDiscipline.bind(controllers.disciplineController)
+    "/create",
+    roleMiddleware(['admin']),
+    controllers.disciplineController.createDiscipline.bind(controllers.disciplineController)
 
 );
 
@@ -18,12 +21,16 @@ router.get(
 );
 
 router.put(
-    "/updateDiscipline/:id", controllers.disciplineController.updateDiscipline.bind(controllers.disciplineController)
+    "/updateDiscipline/:id",
+    roleMiddleware(['user','admin']),
+    controllers.disciplineController.updateDiscipline.bind(controllers.disciplineController)
 
 );
 
 router.delete(
-    "/deleteDiscipline/:id", controllers.disciplineController.deleteDiscipline.bind(controllers.disciplineController)
+    "/deleteDiscipline/:id",
+    roleMiddleware(['user','admin']),
+    controllers.disciplineController.deleteDiscipline.bind(controllers.disciplineController)
 
 );
 

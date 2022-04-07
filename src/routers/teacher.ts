@@ -1,6 +1,10 @@
-import { check, param } from "express-validator";
 import express from "express";
+import { check, param } from "express-validator";
 import controllers from "../controllers";
+import authMiddleware from "../middleware/authMiddleware";
+import roleMiddleware from "../middleware/roleMiddleware";
+
+
 const router = express.Router();
 
 router.post(
@@ -12,17 +16,23 @@ router.post(
             "password",
             "Пароль повинний мати більше 5 символів"
         ).isLength({ min: 5, max: 24 }),
-    ], controllers.teacherController.createTeacher.bind(controllers.teacherController)
+    ],
+    roleMiddleware(['admin']),
+    controllers.teacherController.createTeacher.bind(controllers.teacherController)
 
 );
 
 router.get(
-    "/findOneTeacher/:id", controllers.teacherController.findOneTeacher.bind(controllers.teacherController)
+    "/findOneTeacher/:id",
+    roleMiddleware(['admin']),
+    controllers.teacherController.findOneTeacher.bind(controllers.teacherController)
 
 );
 
 router.get(
-    "/findTeachers", controllers.teacherController.findTeachers.bind(controllers.teacherController)
+    "/findTeachers",
+    roleMiddleware(['admin']),
+    controllers.teacherController.findTeachers.bind(controllers.teacherController)
 
 );
 
@@ -35,12 +45,16 @@ router.put(
             "password",
             "Пароль повинний мати більше 5 символів"
         ).isLength({ min: 5, max: 24 }),
-    ], controllers.teacherController.updateTeacher.bind(controllers.teacherController)
+    ],
+    roleMiddleware(['user','admin']),
+    controllers.teacherController.updateTeacher.bind(controllers.teacherController)
 
 );
 
 router.delete(
-    "/deleteTeacher/:id", controllers.teacherController.deleteTeacher.bind(controllers.teacherController)
+    "/deleteTeacher/:id",
+    roleMiddleware(['admin']),
+    controllers.teacherController.deleteTeacher.bind(controllers.teacherController)
 
 );
 
@@ -55,6 +69,22 @@ router.post(
         ).isLength({ min: 5, max: 24 }),
     ], controllers.teacherController.registrationTeacher.bind(controllers.teacherController)
 
+);
+
+router.post(
+    "/auth",[
+        check("login").isEmail(),
+        check(
+            "password",
+            "Пароль повинний мати більше 5 символів"
+        ).isLength({ min: 5, max: 24 }),
+    ], controllers.teacherController.authTeacher.bind(controllers.teacherController)
+
+);
+
+router.post(
+    "/refreshToken",
+    controllers.teacherController.refreshToken.bind(controllers.teacherController)
 );
 
 export default router;

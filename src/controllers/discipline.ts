@@ -1,3 +1,4 @@
+import express from 'express';
 class DisciplineController {
     
     disciplineService: any;
@@ -5,25 +6,25 @@ class DisciplineController {
         this.disciplineService = disciplineService;
     }
 
-    async createDiscipline(req: any, res: any) {
+    async createDiscipline(req: express.Request, res: express.Response) {
         const { nameDiscipline, nameGroup, numberOfHours } = req.body;
         const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameGroup, numberOfHours );
         res.json(newDiscipline);
     }
 
-    async findOneDiscipline(req: any, res: any) {
+    async findOneDiscipline(req: express.Request, res: express.Response) {
         const oneDiscipline = await this.disciplineService.findOneDiscipline(
             req.params.id
         );
         res.json(oneDiscipline);
     }
 
-    async findDiscipline(req: any, res: any) {
+    async findDiscipline(req: express.Request, res: express.Response) {
         const discipline = await this.disciplineService.findDiscipline();
         res.json(discipline);
     }
 
-    async updateDiscipline(req: any, res: any) {
+    async updateDiscipline(req: express.Request, res: express.Response) {
         const { nameDiscipline, nameGroup, numberOfHours } = req.body;
         const updateDiscipline = await this.disciplineService.updateDiscipline(
             req.params.id,
@@ -34,7 +35,7 @@ class DisciplineController {
         res.json(updateDiscipline);
     }
 
-    async deleteDiscipline(req: any, res: any) {
+    async deleteDiscipline(req: express.Request, res: express.Response) {
         const deleteDiscipline = await this.disciplineService.deleteDiscipline(
             req.params.id
         );

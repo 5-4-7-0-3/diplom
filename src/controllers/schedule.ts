@@ -1,3 +1,4 @@
+import express from 'express';
 class ScheduleController {
     
     scheduleService: any;
@@ -5,25 +6,25 @@ class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    async createSchedule(req: any, res: any) {
+    async createSchedule(req: express.Request, res: express.Response) {
         const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
         const newSchedule = await this.scheduleService.createSchedule(  dateDiscipline, nameDiscipline, nameTeacher );
         res.json(newSchedule);
     }
 
-    async findOneSchedule(req: any, res: any) {
+    async findOneSchedule(req: express.Request, res: express.Response) {
         const OneSchedule = await this.scheduleService.findOneSchedule(
             req.params.id
         );
         res.json(OneSchedule);
     }
 
-    async findSchedule(req: any, res: any) {
+    async findSchedule(req: express.Request, res: express.Response) {
         const discipline = await this.scheduleService.findSchedule();
         res.json(discipline);
     }
 
-    async updateSchedule(req: any, res: any) {
+    async updateSchedule(req: express.Request, res: express.Response) {
         const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
         const updateSchedule = await this.scheduleService.updateSchedule(
             req.params.id,
@@ -34,7 +35,7 @@ class ScheduleController {
         res.json(updateSchedule);
     }
 
-    async deleteSchedule(req: any, res: any) {
+    async deleteSchedule(req: express.Request, res: express.Response) {
         const deleteSchedule = await this.scheduleService.deleteSchedule(
             req.params.id
         );

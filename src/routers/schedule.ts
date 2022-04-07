@@ -1,9 +1,12 @@
 import express from "express";
 import controllers from "../controllers";
+import roleMiddleware from "../middleware/roleMiddleware";
 const router = express.Router();
 
 router.post(
-    "/create", controllers.scheduleController.createSchedule.bind(controllers.scheduleController)
+    "/create",
+    roleMiddleware(['admin']),
+    controllers.scheduleController.createSchedule.bind(controllers.scheduleController)
 
 );
 
@@ -18,12 +21,16 @@ router.get(
 );
 
 router.put(
-    "/updateSchedule/:id", controllers.scheduleController.updateSchedule.bind(controllers.scheduleController)
+    "/updateSchedule/:id",
+    roleMiddleware(['admin']),
+    controllers.scheduleController.updateSchedule.bind(controllers.scheduleController)
 
 );
 
 router.delete(
-    "/deleteSchedule/:id", controllers.scheduleController.deleteSchedule.bind(controllers.scheduleController)
+    "/deleteSchedule/:id",
+    roleMiddleware(['admin']),
+    controllers.scheduleController.deleteSchedule.bind(controllers.scheduleController)
 
 );
 
