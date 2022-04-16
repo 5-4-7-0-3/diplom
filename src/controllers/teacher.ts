@@ -11,17 +11,16 @@ class TeachersController {
     }
 
     async createTeacher(req: express.Request, res: express.Response) {
-        const {  nameTeacher, surname, login, password, nameDiscipline } = req.body;
+        const {  name, surname, email, password } = req.body;
         const role: string = "user";
         const healthStatus: string = "healthy";
         const newTeacher = await this.teachersService.createTeacher(
-             nameTeacher,
-             surname,
-             login,
-             password,
-             nameDiscipline,
-             healthStatus,
-             role );
+            name,
+            surname,
+            email,
+            password,
+            healthStatus,
+            role );
         res.json(newTeacher);
     }
 
@@ -39,14 +38,13 @@ class TeachersController {
     }
 
     async updateTeacher(req: express.Request, res: express.Response) {
-        const { nameTeacher, surname, login, password, nameDiscipline, healthStatus, role } = req.body;
+        const { name, surname, email, password, healthStatus, role } = req.body;
         const updateTeacher = await this.teachersService.updateTeacher(
             req.params.id,
-            nameTeacher,
+            name,
             surname,
-            login,
+            email,
             password,
-            nameDiscipline,
             healthStatus,
             role
         );
@@ -69,8 +67,8 @@ class TeachersController {
         if (!err.isEmpty()) {
             return res.status(400).json(err);
         }
-        const { nameTeacher, surname, login, password, nameDiscipline } = req.body;
-        const candidate = await this.teachersService.loginVerification(login);
+        const { name, surname, email, password } = req.body;
+        const candidate = await this.teachersService.loginVerification(email);
         const role: string = "user";
         const healthStatus: string = "healthy";
 
@@ -80,11 +78,10 @@ class TeachersController {
 
             const hashPassword = bcrypt.hashSync(password, 7);
             const teacher = await this.teachersService.createTeacher(
-                nameTeacher,
+                name,
                 surname,
-                login,
+                email,
                 hashPassword,
-                nameDiscipline,
                 healthStatus,
                 role
             );
@@ -93,13 +90,13 @@ class TeachersController {
     }
 
     async authTeacher(req: express.Request, res: express.Response) {
-        const { login, password } = req.body;
-        const teacher = await this.teachersService.loginVerification(login);
+        const { email, password } = req.body;
+        const teacher = await this.teachersService.loginVerification(email);
 
         if (!teacher) {
             return res
                 .status(400)
-                .json({ message: `Користувача з таким логіном ${login} не знайдено` });
+                .json({ message: `Користувача з таким логіном ${email} не знайдено` });
         }
 
         const validationPassword = bcrypt.compareSync(password, teacher.password);

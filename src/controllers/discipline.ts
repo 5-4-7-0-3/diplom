@@ -1,14 +1,14 @@
 import express from 'express';
 class DisciplineController {
-    
+
     disciplineService: any;
     constructor(disciplineService: any) {
         this.disciplineService = disciplineService;
     }
 
     async createDiscipline(req: express.Request, res: express.Response) {
-        const { nameDiscipline, nameGroup, numberOfHours } = req.body;
-        const newDiscipline = await this.disciplineService.createDiscipline( nameDiscipline, nameGroup, numberOfHours );
+        const { nameDisciplines } = req.body;
+        const newDiscipline = await this.disciplineService.createDiscipline( nameDisciplines );
         res.json(newDiscipline);
     }
 
@@ -19,18 +19,16 @@ class DisciplineController {
         res.json(oneDiscipline);
     }
 
-    async findDiscipline(req: express.Request, res: express.Response) {
-        const discipline = await this.disciplineService.findDiscipline();
+    async findDisciplines(req: express.Request, res: express.Response) {
+        const discipline = await this.disciplineService.findDisciplines();
         res.json(discipline);
     }
 
     async updateDiscipline(req: express.Request, res: express.Response) {
-        const { nameDiscipline, nameGroup, numberOfHours } = req.body;
+        const { nameDisciplines } = req.body;
         const updateDiscipline = await this.disciplineService.updateDiscipline(
             req.params.id,
-            nameDiscipline, 
-            nameGroup,
-            numberOfHours
+            nameDisciplines
         );
         res.json(updateDiscipline);
     }
@@ -42,7 +40,7 @@ class DisciplineController {
             if(deleteDiscipline.deletedCount > 0){
                 res.json(deleteDiscipline);
             } else res.json({ message: "Не вдалось видалити." })
-                
+
     }
 }
 

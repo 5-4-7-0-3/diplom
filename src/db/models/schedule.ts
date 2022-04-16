@@ -1,23 +1,32 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const scheduleSchema = new Schema({
-    dateDiscipline: {
+const schedule = new Schema({
+    date: {
         type: Date,
         required: true,
     },
 
-    nameDiscipline: {
-        ref: 'discipline',
-        type: Schema.Types.ObjectId
+    nameGroups: {
+        ref: 'groups',
+        type: [Schema.Types.ObjectId]
     },
 
-    nameTeacher: {
-        ref: 'teacher',
-        type: Schema.Types.ObjectId
-    }
+    nameDisciplines: {
+        ref: 'disciplines',
+        type: [Schema.Types.ObjectId]
+    },
 
+    timeInterval: {
+        ref: 'couple',
+        type: [Schema.Types.ObjectId]
+    },
+
+    teacher: {
+        ref: 'teachers',
+        type: [Schema.Types.ObjectId]
+    }
 });
 
-const Schedule = mongoose.model("Schedule", scheduleSchema);
+const Schedule = mongoose.model("schedule", schedule);
 export { Schedule };

@@ -1,30 +1,30 @@
 class TeachersService {
-    teacherDAO: any;
-    constructor(teacherDAO:any) {
-        this.teacherDAO = teacherDAO;
+    teachersDAO: any;
+    constructor(teachersDAO:any) {
+        this.teachersDAO = teachersDAO;
     }
-    createTeacher( nameTeacher:string, surname:string, login:string, hashPassword:string, nameDiscipline:string, healthStatus:string, role:string ) {
-        return this.teacherDAO.createTeacher( nameTeacher, surname, login, hashPassword, nameDiscipline, healthStatus, role );
+    createTeacher( name:string, surname:string, email:string, password:string, healthStatus:string, role:string ) {
+        return this.teachersDAO.createTeacher( name, surname, email, password, healthStatus, role );
     }
 
     findOneTeacher(id: string) {
-        return this.teacherDAO.findOneTeacher(id);
+        return this.teachersDAO.findOneTeacher(id);
     }
 
     findTeachers() {
-        return this.teacherDAO.findTeachers();
+        return this.teachersDAO.findTeachers();
     }
 
-    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ) {
-        return this.teacherDAO.updateTeacher(id, nameTeacher, surname, login, password, nameDiscipline, healthStatus, role );
+    updateTeacher(id: string, name:string, surname:string, email:string, password:string, healthStatus:string, role:string ) {
+        return this.teachersDAO.updateTeacher(id, name, surname, email, password, healthStatus, role );
     }
 
     deleteTeacher(id: string) {
-        return this.teacherDAO.deleteTeacher(id);
+        return this.teachersDAO.deleteTeacher(id);
     }
 
-    loginVerification(login: string) {
-        return this.teacherDAO.loginVerification(login);
+    loginVerification(email: string) {
+        return this.teachersDAO.loginVerification(email);
     }
 }
 export { TeachersService };

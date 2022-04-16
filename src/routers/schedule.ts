@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post(
     "/create",
-    roleMiddleware(['admin']),
+    // roleMiddleware(['admin']),
     controllers.scheduleController.createSchedule.bind(controllers.scheduleController)
 
 );
@@ -22,14 +22,14 @@ router.get(
 
 router.put(
     "/updateSchedule/:id",
-    roleMiddleware(['admin']),
+    // roleMiddleware(['admin']),
     controllers.scheduleController.updateSchedule.bind(controllers.scheduleController)
 
 );
 
 router.delete(
     "/deleteSchedule/:id",
-    roleMiddleware(['admin']),
+    // roleMiddleware(['admin']),
     controllers.scheduleController.deleteSchedule.bind(controllers.scheduleController)
 
 );

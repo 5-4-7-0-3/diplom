@@ -1,14 +1,20 @@
 import express from 'express';
 class ScheduleController {
-    
+
     scheduleService: any;
     constructor(scheduleService: any) {
         this.scheduleService = scheduleService;
     }
 
     async createSchedule(req: express.Request, res: express.Response) {
-        const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
-        const newSchedule = await this.scheduleService.createSchedule(  dateDiscipline, nameDiscipline, nameTeacher );
+        const { date, nameGroups, nameDisciplines, timeInterval, teacher } = req.body;
+        const newSchedule = await this.scheduleService.createSchedule(
+            date,
+            nameGroups,
+            nameDisciplines,
+            timeInterval,
+            teacher
+            );
         res.json(newSchedule);
     }
 
@@ -20,17 +26,18 @@ class ScheduleController {
     }
 
     async findSchedule(req: express.Request, res: express.Response) {
-        const discipline = await this.scheduleService.findSchedule();
-        res.json(discipline);
+        const schedules = await this.scheduleService.findSchedule();
+        res.json(schedules);
     }
 
     async updateSchedule(req: express.Request, res: express.Response) {
-        const { dateDiscipline, nameDiscipline, nameTeacher } = req.body;
+        const { date, nameGroups, nameDisciplines, timeInterval, teacher } = req.body;
         const updateSchedule = await this.scheduleService.updateSchedule(
             req.params.id,
-            dateDiscipline,
-            nameDiscipline,
-            nameTeacher
+            date, nameGroups,
+            nameDisciplines,
+            timeInterval,
+            teacher
         );
         res.json(updateSchedule);
     }
@@ -42,7 +49,7 @@ class ScheduleController {
             if(deleteSchedule.deletedCount > 0){
                 res.json(deleteSchedule);
             } else res.json({ message: "Не вдалось видалити." })
-                
+
     }
 }
 

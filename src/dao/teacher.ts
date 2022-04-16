@@ -1,48 +1,47 @@
-import { Teacher } from "../db/models/teacher";
+import { Teachers } from "../db/models/teacher";
 
-class TeacherDAO {
-    createTeacher( nameTeacher:string, surname:string, login:string, hashPassword:string, nameDiscipline:string, healthStatus:string, role:string ) {
-        return new Teacher({
-            nameTeacher,
+class TeachersDAO {
+    createTeacher( name:string, surname:string, email:string, hashPassword:string, healthStatus:string, role:string ) {
+        return new Teachers({
+            name,
             surname,
-            login,
+            email,
             password: hashPassword,
-            nameDiscipline,
-            healthStatus, 
-            role 
+            healthStatus,
+            role
         }).save();
     }
 
     findOneTeacher(id: string) {
-        return Teacher.findById(id).populate({ path: "nameDiscipline", select: "nameDiscipline" });
+        return Teachers.findById(id);
     }
 
     findTeachers(){
-        return Teacher.find().populate({ path: "nameDiscipline", select: "nameDiscipline" });
+        return Teachers.find();
     }
 
-    updateTeacher(id: string, nameTeacher:string, surname:string, login:string, password:string, nameDiscipline:string, healthStatus:string, role:string ){
-        return Teacher.findOneAndUpdate(
+    updateTeacher(id: string, name:string, surname:string, email:string, password:string, healthStatus:string, role:string ){
+        return Teachers.findOneAndUpdate(
             { _id: id },
             {
-              $set: {nameTeacher, surname, login, password, nameDiscipline, healthStatus, role}
+              $set: {name, surname, email, password, healthStatus, role}
             },
             { new: true }
           );
     }
 
     deleteTeacher(id: string){
-        return Teacher.deleteOne({ _id: id })
+        return Teachers.deleteOne({ _id: id })
     }
 
-    loginVerification(login: string) {
-        return Teacher.findOne({ login: login })
-    
-    
+    loginVerification(email: string) {
+        return Teachers.findOne({ email: email })
+
+
       }
-    
+
 }
 
-const teachersDAO = new TeacherDAO()
+const teachersDAO = new TeachersDAO()
 
 export { teachersDAO }

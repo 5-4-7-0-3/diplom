@@ -20,7 +20,14 @@ function setupDb() {
     async function main() {
         await mongoose.connect(url, options);
         console.log("MongoDB is connected");
+        mongoose.connection.db.dropDatabase();
     }
 }
+
+
+
+
+
+
 
 export { setupDb };

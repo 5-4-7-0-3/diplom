@@ -1,27 +1,27 @@
-import { Discipline } from "../db/models/discipline";
+import { Discipline } from "../db/models/disciplines";
 
 class DisciplineDAO {
-    createDiscipline(nameDiscipline: string, nameGroup:string, numberOfHours: number) {
+    createDiscipline(nameDisciplines: string) {
         return new Discipline({
-            nameDiscipline,
-            nameGroup,
-            numberOfHours,
+            nameDisciplines
         }).save();
     }
 
     findOneDiscipline(id: string) {
-        return Discipline.findById(id).populate({ path: "nameGroup", select: "nameGroup" });
+        return Discipline.findById(id);
     }
 
-    findDiscipline(){
-        return Discipline.find().populate({ path: "nameGroup", select: "nameGroup" });
+    findDisciplines(){
+        return Discipline.find();
     }
 
-    updateDiscipline(id: string, nameDiscipline: string, nameGroup: string, numberOfHours: number){
+    updateDiscipline(id: string, nameDisciplines: string){
         return Discipline.findOneAndUpdate(
             { _id: id },
             {
-              $set: {nameDiscipline, nameGroup, numberOfHours}
+              $set: {
+                nameDisciplines
+                    }
             },
             { new: true }
           );
@@ -30,7 +30,7 @@ class DisciplineDAO {
     deleteDiscipline(id: string){
         return Discipline.deleteOne({ _id: id })
     }
-    
+
 }
 
 const disciplineDAO = new DisciplineDAO()

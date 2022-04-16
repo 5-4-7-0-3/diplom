@@ -1,27 +1,27 @@
 class DisciplineService {
-    disciplineDAO: any;
-    constructor(disciplineDAO:any) {
-        this.disciplineDAO = disciplineDAO;
+    disciplinesDAO: any;
+    constructor(disciplinesDAO:any) {
+        this.disciplinesDAO = disciplinesDAO;
     }
-    
-    createDiscipline(nameDiscipline: string, nameGroup:string, numberOfHours: number) {
-        return this.disciplineDAO.createDiscipline(nameDiscipline, nameGroup, numberOfHours);
+
+    createDiscipline(nameDisciplines: string ) {
+        return this.disciplinesDAO.createDiscipline(nameDisciplines);
     }
 
     findOneDiscipline(id: string) {
-        return this.disciplineDAO.findOneDiscipline(id);
+        return this.disciplinesDAO.findOneDiscipline(id);
     }
 
-    findDiscipline() {
-        return this.disciplineDAO.findDiscipline();
+    findDisciplines() {
+        return this.disciplinesDAO.findDisciplines();
     }
 
-    updateDiscipline(id: string, nameDiscipline: string, nameGroup:string, nameTeacher: string, numberOfHours: number) {
-        return this.disciplineDAO.updateDiscipline(id, nameDiscipline, nameGroup, nameTeacher, numberOfHours);
+    updateDiscipline(id: string, nameDisciplines: string ) {
+        return this.disciplinesDAO.updateDiscipline(id, nameDisciplines);
     }
 
     deleteDiscipline(id: string) {
-        return this.disciplineDAO.deleteDiscipline(id);
+        return this.disciplinesDAO.deleteDiscipline(id);
     }
 }
 export { DisciplineService };

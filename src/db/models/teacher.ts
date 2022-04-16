@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const teacherSchema = new Schema({
-    nameTeacher: {
+    name: {
         type: String,
         required: true,
     },
@@ -12,7 +12,7 @@ const teacherSchema = new Schema({
         required: true,
     },
 
-    login: {
+    email: {
         type: String,
         required: true,
     },
@@ -20,11 +20,6 @@ const teacherSchema = new Schema({
     password: {
         type: String,
         required: true,
-    },
-
-    nameDiscipline: {
-        ref: 'discipline',
-        type: [Schema.Types.ObjectId]
     },
 
     healthStatus: {
@@ -38,5 +33,5 @@ const teacherSchema = new Schema({
     }
 });
 
-const Teacher = mongoose.model("teacher", teacherSchema);
-export { Teacher };
+const Teachers = mongoose.model("teachers", teacherSchema);
+export { Teachers };

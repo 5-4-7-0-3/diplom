@@ -1,32 +1,42 @@
 import { Schedule } from "../db/models/schedule";
 
 class ScheduleDAO {
-    createSchedule( dateDiscipline: Date, nameDiscipline: string, nameTeacher: string) {
+    createSchedule( date: Date, nameGroups: string, nameDisciplines: string, timeInterval: string, teacher: string) {
         return new Schedule({
-            dateDiscipline, 
-            nameDiscipline, 
-            nameTeacher
+            date,
+            nameGroups,
+            nameDisciplines,
+            timeInterval,
+            teacher
         }).save();
     }
 
     findOneSchedule(id: string) {
-        return Schedule.findById(id).populate({ path: "nameDiscipline", select: "nameDiscipline" })
-        .populate({ path: "nameTeacher", select: "nameTeacher" });
+        return Schedule.findById(id)
+        .populate({ path: "nameGroups", select: "nameGroups" })
+        .populate({ path: "nameDisciplines", select: "nameDisciplines" })
+        .populate({ path: "timeInterval", select: "timeInterval" })
+        .populate({ path: "teacher", select: ["name", "surname"] });
     }
 
     findSchedule(){
-        return Schedule.find().populate({ path: "nameDiscipline", select: ["nameDiscipline","nameGroup"] })
-        .populate({ path: "nameTeacher", select: ["nameTeacher","surname","healthStatus"] });
+        return Schedule.find()
+        .populate({ path: "nameGroups", select: "nameGroups" })
+        .populate({ path: "nameDisciplines", select: "nameDisciplines" })
+        .populate({ path: "timeInterval", select: "timeInterval" })
+        .populate({ path: "teacher", select: ["name", "surname"] });
     }
 
-    updateSchedule(id: string, dateDiscipline: Date, nameDiscipline: string, nameTeacher: string){
+    updateSchedule(id: string, date: Date, nameGroups: string, nameDisciplines: string, timeInterval: string, teacher: string){
         return Schedule.findOneAndUpdate(
             { _id: id },
             {
               $set: {
-                     dateDiscipline,
-                     nameDiscipline,
-                     nameTeacher
+                        date,
+                        nameGroups,
+                        nameDisciplines,
+                        timeInterval,
+                        teacher
                     }
             },
             { new: true }
@@ -36,7 +46,7 @@ class ScheduleDAO {
     deleteSchedule(id: string){
         return Schedule.deleteOne({ _id: id })
     }
-    
+
 }
 
 const scheduleDAO = new ScheduleDAO()

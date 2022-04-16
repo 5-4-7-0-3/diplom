@@ -1,11 +1,22 @@
 import { teachersDAO } from "./teacher";
-import { disciplineDAO } from "./discipline";
-import { scheduleDAO } from "./schedule";
 import { tokenDAO } from "./tokens";
+import { coupleDAO } from "./couple";
+import { disciplineDAO } from "./discipline";
+import { groupsDAO } from "./groups";
+import { scheduleDAO } from "./schedule";
+import { teacherOrientationDAO } from "./teacherOrientation";
+import { workingHoursDAO } from "./workingHours";
+
+
 
 export default {
     teachersDAO,
+    tokenDAO,
+    coupleDAO,
     disciplineDAO,
+    groupsDAO,
     scheduleDAO,
-    tokenDAO
+    teacherOrientationDAO,
+    workingHoursDAO,
+
 };
