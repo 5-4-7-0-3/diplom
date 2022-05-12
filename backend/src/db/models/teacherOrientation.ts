@@ -10,7 +10,7 @@ const teacherOrientation = new Schema({
     nameDisciplines: {
         ref: 'disciplines',
         type: [Schema.Types.ObjectId]
-    }
+    },
 });
 
 const TeacherOrientation = mongoose.model("teacherOrientation", teacherOrientation);

@@ -10,6 +10,7 @@ import routerTeacherOrientation from "./src/routers/teacherOrientation";
 import routerWorkingHours from "./src/routers/workingHours";
 
 import {dropDatabase} from "./src/helpers/dropdb"
+import { seedTableCouple, seedTableDiscipline, seedTableGroups, seedTableSchedule, seedTableTeacher, seedTableTeacherOrientation, seedTableWorkingHours } from "./src/helpers/seedTable";
 
 
 require("express-async-errors");
@@ -32,6 +33,52 @@ app.use("/workingHours", routerWorkingHours);
 app.use("/dropDb", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
     dropDatabase()
     return res.json({ message: "droped" });
+});
+
+app.use("/seed", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableCouple();
+    seedTableGroups();
+    seedTableDiscipline();
+    seedTableTeacher();
+    return res.json({ message: "All seeded" });
+});
+
+app.use("/seedCouple", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableCouple()
+    return res.json({ message: "Couple seeded" });
+});
+
+app.use("/seedGroups", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableGroups()
+    return res.json({ message: "Groups seeded" });
+});
+
+app.use("/seedDiscipline", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableDiscipline()
+    return res.json({ message: "Discipline seeded" });
+});
+
+app.use("/seedTeacher", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableTeacher()
+    return res.json({ message: "Teacher seeded" });
+});
+
+
+
+
+app.use("/seedTableWorkingHours", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableWorkingHours()
+    return res.json({ message: "WorkingHours seeded" });
+});
+
+app.use("/seedTableTeacherOrientation", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableTeacherOrientation()
+    return res.json({ message: "Schedule seeded" });
+});
+
+app.use("/seedTableSchedule", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
+    seedTableSchedule()
+    return res.json({ message: "Schedule seeded" });
 });
 
 

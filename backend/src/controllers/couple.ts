@@ -7,8 +7,8 @@ class CoupleController {
     }
 
     async createCouple(req: express.Request, res: express.Response) {
-        const { timeInterval } = req.body;
-        const newCouple = await this.coupleService.createCouple( timeInterval );
+        const { numberCouple, timeInterval } = req.body;
+        const newCouple = await this.coupleService.createCouple( numberCouple, timeInterval );
         res.json(newCouple);
     }
 
@@ -25,9 +25,10 @@ class CoupleController {
     }
 
     async updateCouple(req: express.Request, res: express.Response) {
-        const { timeInterval } = req.body;
+        const { numberCouple, timeInterval } = req.body;
         const updateCouple = await this.coupleService.updateCouple(
             req.params.id,
+            numberCouple,
             timeInterval
         );
         res.json(updateCouple);
