@@ -25,7 +25,7 @@
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "serve": "nodemon ./server.ts"
+    "serve": "nodemon ./index.ts"
   },
   "repository": {
     "type": "git",
