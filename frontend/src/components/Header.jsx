@@ -48,7 +48,7 @@ export default function Header() {
             </MDBNavbar>
 
             <div className='p-5 text-center bg-light'>
-                <h1 className='mb-3'>Heading</h1>
+                <h1 className='mb-3'>РОЗКЛАД <p>ДЛЯ ФАКУЛЬТЕТУ ІНОЗЕМНОЇ ФІЛОЛОГІЇ</p></h1>
 
 
             </div>

@@ -1,9 +1,8 @@
 const axios = require('axios').default;
 
-async function createSchedule(date, nameGroups, nameDisciplines, timeInterval, teacher) {
+async function createSchedule(nameGroups, nameDisciplines, timeInterval, teacher) {
     try {
         const response = await axios.post('http://localhost:3000/schedule/create', {
-            date,
             nameGroups,
             nameDisciplines,
             timeInterval,
@@ -18,7 +17,7 @@ async function createSchedule(date, nameGroups, nameDisciplines, timeInterval, t
 async function getSchedules() {
     try {
         const response = await axios.get('http://localhost:3000/schedule/findSchedule');
-        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.error(error);
     }
@@ -57,4 +56,5 @@ async function deleteSchedules(id) {
     }
 }
 
-export default { createSchedule, getSchedules, getOneSchedule, updateSchedule, deleteSchedules }
+export default { createSchedule, getSchedules, getOneSchedule, updateSchedule, deleteSchedules };
+

@@ -20,7 +20,7 @@ function setupDb() {
     async function main() {
         await mongoose.connect(url, options);
         console.log("MongoDB is connected");
-        mongoose.connection.db.dropCollection('schedules', function(err, result) {});
+        // mongoose.connection.db.dropCollection('schedules', function(err, result) {});
     }
 }
 

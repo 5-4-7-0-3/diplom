@@ -157,28 +157,27 @@ async function seedTableSchedule() {
 
     let groups = await Groups.find();
     let cocouples = await Couple.find();
-    // let date = new Date(2022 , 5, 2);
     let date = new Date(Date.now());
 
     for (let g = 0; g < 1 /*groups.length*/; g++) {  ////////////////////////////////groups    G
-        let workingHours = await WorkingHours.find( {nameGroups: groups[g]._id} );
-        let allWorkingHours = 0;
+            let workingHours = await WorkingHours.find( {nameGroups: groups[g]._id} );
+            let allWorkingHours = 0;
 
         for (let wh = 0; wh < workingHours.length; wh++) {
             let elementWH = workingHours[wh];
             allWorkingHours = allWorkingHours + elementWH.workingHours
         }
 
-        console.log("allWorkingHour = " + allWorkingHours);    //////////////////////
+            console.log("allWorkingHour = " + allWorkingHours);    //////////////////////
 
-        let hoursOneDay = Math.floor( allWorkingHours / 5 )
-        let hoursOneDayRemainder = allWorkingHours % 5;
+            let hoursOneDay = Math.floor( allWorkingHours / 5 )
+            let hoursOneDayRemainder = allWorkingHours % 5;
 
-        if (hoursOneDayRemainder > 0) {
-            hoursOneDay++
-        }
-        console.log("hoursOneDay = " + hoursOneDay);
-        console.log("hoursOneDayRemainder = " + hoursOneDayRemainder);
+            // if (hoursOneDayRemainder > 0) {
+            //     hoursOneDay++
+            // }
+            console.log("hoursOneDay = " + hoursOneDay);
+            console.log("hoursOneDayRemainder = " + hoursOneDayRemainder);
 
         for (let h = 0; h < workingHours.length; h++) {///////////////////// workingHours    H
             const elementworkingHours = workingHours[h];
@@ -187,13 +186,16 @@ async function seedTableSchedule() {
 
 
 
-                console.log("запись = " + hoursOneDay);
+                    console.log("запись = " + hoursOneDay);
                 for (let c = 0; c < hoursOneDay; c++) {////////////////////////////cocouples    C
                     const elementCocouples = cocouples[c];
                     // console.log("==============");
                     // console.log(hoursOneDay);
                     // console.log("==============");
 
+                    if (c===workingHours[h].workingHours) {
+                        c = 100;
+                    }
 
 
                     let teacher = await TeacherOrientation.findOne({ nameDisciplines: workingHours[h].nameDisciplines });
@@ -210,13 +212,13 @@ async function seedTableSchedule() {
 
 
 
-                    // await new Schedule({
-                    //         date,
-                    //         nameGroups: groups[g]._id,
-                    //         nameDisciplines: elementworkingHours.nameDisciplines[0]._id,
-                    //         timeInterval: elementCocouples._id,
-                    //         teacher: teacher.nameTeacher[0]._id
-                    //     }).save();
+                    await new Schedule({
+                            date,
+                            nameGroups: groups[g]._id,
+                            nameDisciplines: elementworkingHours.nameDisciplines[0]._id,
+                            timeInterval: elementCocouples._id,
+                            teacher: teacher.nameTeacher[0]._id
+                        }).save();
 
 
 

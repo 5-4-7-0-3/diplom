@@ -1,35 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import ScheduleAPI from '../routers/schedule.js';
+import moment from 'moment'
 
 export default function TableSchedule() {
+
+    const [schedule, setSchedule] = useState([]);
+    useEffect(async ()=>{
+        const responseSchedule = await ScheduleAPI.getSchedules();
+        setSchedule(responseSchedule);
+    });
+
+    function dateParse(scheduleDate){
+        return moment(scheduleDate).format('DD-MM-YYYY dddd');
+    }
+
+
     return (
+
         <MDBTable>
             <MDBTableHead>
                 <tr>
-                    <th scope='col'>#</th>
-                    <th scope='col'>First</th>
-                    <th scope='col'>Last</th>
-                    <th scope='col'>Handle</th>
+                    <th scope='col'>Дата</th>
+                    <th scope='col'>Пара</th>
+                    <th scope='col'>Початок/Кінець</th>
+                    <th scope='col'>Група</th>
+                    <th scope='col'>Предмет</th>
+                    <th scope='col'>Викладач</th>
                 </tr>
             </MDBTableHead>
             <MDBTableBody>
-                <tr>
-                    <th scope='row'>1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope='row'>2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope='row'>3</th>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {schedule.map(scheduleElement=>(<tr>
+                    <th scope='row'>{dateParse(scheduleElement.date)}</th>
+                    <td>{scheduleElement.timeInterval[0].numberCouple}</td>
+                    <td>{scheduleElement.timeInterval[0].timeInterval}</td>
+                    <td>{scheduleElement.nameGroups[0].nameGroups}</td>
+                    <td>{scheduleElement.nameDisciplines[0].nameDisciplines}</td>
+
+                    <td>{scheduleElement.teacher[0].name} {scheduleElement.teacher[0].surname}</td>
+
+                </tr>))}
             </MDBTableBody>
         </MDBTable>
     );

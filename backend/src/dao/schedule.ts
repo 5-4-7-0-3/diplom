@@ -15,7 +15,7 @@ class ScheduleDAO {
         return Schedule.findById(id)
         .populate({ path: "nameGroups", select: "nameGroups" })
         .populate({ path: "nameDisciplines", select: "nameDisciplines" })
-        .populate({ path: "timeInterval", select: "timeInterval" })
+        .populate({ path: "timeInterval", select: ["numberCouple", "timeInterval"] })
         .populate({ path: "teacher", select: ["name", "surname"] });
     }
 
@@ -23,7 +23,7 @@ class ScheduleDAO {
         return Schedule.find()
         .populate({ path: "nameGroups", select: "nameGroups" })
         .populate({ path: "nameDisciplines", select: "nameDisciplines" })
-        .populate({ path: "timeInterval", select: "timeInterval" })
+        .populate({ path: "timeInterval", select: ["numberCouple", "timeInterval"] })
         .populate({ path: "teacher", select: ["name", "surname"] });
     }
 

@@ -50,5 +50,5 @@ async function deleteCouples(id) {
         console.error(error);
     }
 }
-
+getCouples()
 export default { createCouple, getCouples, getOneCouple, updateCouple, deleteCouples }
