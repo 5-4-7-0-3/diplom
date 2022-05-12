@@ -1,8 +1,9 @@
 import { Couple } from "../db/models/couple";
 
 class CoupleDAO {
-    createCouple(timeInterval: string) {
+    createCouple(timeInterval: string, numberCouple: string) {
         return new Couple({
+            numberCouple,
             timeInterval
         }).save();
     }
@@ -15,11 +16,12 @@ class CoupleDAO {
         return Couple.find();
     }
 
-    updateCouple(id: string, timeInterval: string){
+    updateCouple(id: string, timeInterval: string, numberCouple: string){
         return Couple.findOneAndUpdate(
             { _id: id },
             {
               $set: {
+                        numberCouple,
                         timeInterval
                     }
             },

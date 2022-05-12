@@ -4,8 +4,8 @@ class CoupleService {
         this.coupleDAO = coupleDAO;
     }
 
-    createCouple(timeInterval: string) {
-        return this.coupleDAO.createCouple(timeInterval);
+    createCouple(numberCouple: string, timeInterval: string) {
+        return this.coupleDAO.createCouple(numberCouple, timeInterval);
     }
 
     findOneCouple(id: string) {
@@ -16,8 +16,8 @@ class CoupleService {
         return this.coupleDAO.findCouple();
     }
 
-    updateCouple(id: string, timeInterval: string) {
-        return this.coupleDAO.updateCouple(id, timeInterval);
+    updateCouple(id: string, numberCouple: string, timeInterval: string) {
+        return this.coupleDAO.updateCouple(id, numberCouple, timeInterval);
     }
 
     deleteCouple(id: string) {
