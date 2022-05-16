@@ -23,11 +23,4 @@ function setupDb() {
         // mongoose.connection.db.dropCollection('schedules', function(err, result) {});
     }
 }
-
-
-
-
-
-
-
 export { setupDb };

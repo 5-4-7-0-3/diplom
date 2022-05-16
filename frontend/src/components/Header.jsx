@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ModalAuth from './modals/ModalAuth'
+import ModalReg from './modals/ModalReg'
+import ModalTeacher from './modals/ModalTeacher'
+import ModalDiscipline from './modals/ModalDiscipline';
 import {
     MDBNavbar,
     MDBNavbarNav,
@@ -7,12 +11,17 @@ import {
     MDBNavbarToggler,
     MDBContainer,
     MDBIcon,
-    MDBBtn
 } from 'mdb-react-ui-kit';
+import ModalGroup from './modals/ModalGroup';
+
+
+
 
 export default function Header() {
+
     return (
         <header>
+
             <MDBNavbar expand='lg' light bgColor='white' fixed>
                 <MDBContainer fluid>
                     <MDBNavbarToggler
@@ -23,26 +32,35 @@ export default function Header() {
                         <MDBIcon fas icon='bars' />
                     </MDBNavbarToggler>
                     <div className='collapse navbar-collapse' id='navbarExample01'>
-                        <MDBNavbarNav right className='mb-2 mb-lg-0'>
-                            <MDBNavbarItem active>
+                        <MDBNavbarNav left className='mb-2 mb-lg-0'>
+
+                            <MDBNavbarItem active className='pl-1'>
                                 <MDBNavbarLink aria-current='page' href='#'>
                                     Home
                                 </MDBNavbarLink>
                             </MDBNavbarItem>
 
-                            <MDBNavbarItem active>
-                                <MDBBtn className='mx-2' color='success'>
-                                    login
-                                </MDBBtn>
+                            <MDBNavbarItem active className='d-flex m-1'>
+                                <ModalTeacher />
                             </MDBNavbarItem>
-
-                            <MDBNavbarItem active>
-                                <MDBBtn className='mx-2' color='light'>
-                                    register
-                                </MDBBtn>
+                            <MDBNavbarItem active className='d-flex m-1'>
+                                <ModalDiscipline />
+                            </MDBNavbarItem>
+                            <MDBNavbarItem active className='d-flex m-1'>
+                                <ModalGroup />
                             </MDBNavbarItem>
 
                         </MDBNavbarNav>
+                            <MDBNavbarItem active className='d-flex mr-1 flex-row-reverse'>
+                                <ModalReg />
+                            </MDBNavbarItem>
+
+                            <MDBNavbarItem active className='d-flex ml-1 flex-row-reverse'>
+                                <ModalAuth />
+                            </MDBNavbarItem>
+
+
+
                     </div>
                 </MDBContainer>
             </MDBNavbar>

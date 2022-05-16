@@ -15,7 +15,8 @@ async function createTeacherOrientation(nameTeacher, nameDisciplines) {
 async function getTeacherOrientation() {
     try {
         const response = await axios.get('http://localhost:3000/teacherOrientation/findTeacherOrientation');
-        console.log(response.data);
+        
+        return response.data;
     } catch (error) {
         console.error(error);
     }

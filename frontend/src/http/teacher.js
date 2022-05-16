@@ -17,7 +17,7 @@ async function createTeacher(name, surname, email, password) {
 async function getTeachers() {
     try {
         const response = await axios.get('http://localhost:3000/teacher/findTeachers');
-        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.error(error);
     }
@@ -63,7 +63,7 @@ async function registration(name, surname, email, password) {
             email,
             password
         })
-        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.error(error);
     }
@@ -75,7 +75,7 @@ async function auth(email, password) {
             email,
             password
         })
-        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.error(error);
     }

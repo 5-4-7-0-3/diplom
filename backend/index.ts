@@ -22,6 +22,15 @@ const server = require("http").createServer(app);
 setupDb();
 
 app.use(express.json());
+
+app.use(function(req: any, res: { header: (arg0: string, arg1: string) => void; }, next: () => void) {
+    res.header("Access-Control-Allow-Origin", "localhost:3000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+
+
 app.use("/couple", routerCouple);
 app.use("/discipline", routerDiscipline);
 app.use("/groups", routerGroups);
@@ -66,6 +75,9 @@ app.use("/seedTeacher", (req: any, res: { json: (arg0: { message: string; }) => 
 
 
 
+
+
+
 app.use("/seedTableWorkingHours", (req: any, res: { json: (arg0: { message: string; }) => any; })=>{
     seedTableWorkingHours()
     return res.json({ message: "WorkingHours seeded" });
@@ -85,6 +97,10 @@ app.use("/seedTableSchedule", (req: any, res: { json: (arg0: { message: string; 
 // app.use("/", (req: any, res: { json: (arg0: { message: string; }) => any; }) => {
 //     return res.json({ message: "HALO" });
 // });
+
+
+
+
 app.use(errorHandler);
 
 
